@@ -23,8 +23,6 @@ class HeaderView: UIView {
     let titleFontSize: CGFloat = 20
     let timeFontSize: CGFloat = 8
     
-    static let shared = HeaderView()
-    
     lazy var newsImageView: UIImageView = {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: imageHeight))
         imageView.contentMode = .scaleAspectFill
@@ -52,24 +50,26 @@ class HeaderView: UIView {
         return label
     } ()
     
-//    private override init(frame: CGRect) {
-//        super.init(frame: CGRect(x: 0, y: yOffset, width: frame.width, height: viewHeight))
-//
-//        self.backgroundColor = .white
-//        self.layer.cornerRadius = 10
-//        self.layer.shadowOffset = CGSize(width: 0, height: 5)
-//        self.layer.shadowColor = UIColor.black.cgColor
-//        self.layer.shadowRadius = 8
-//        self.layer.shadowOpacity = 0.5
-//
-//        self.addSubview(newsImageView)
-//        self.addSubview(newsTitleLabel)
-//        self.addSubview(newsTimeLabel)
-//    }
-    
-    func layoutSubviews(article: NewsArticle) {
+    init(frame: CGRect, article: NewsArticle) {
+        super.init(frame: CGRect(x: 0, y: yOffset, width: frame.width, height: viewHeight))
+
+        self.backgroundColor = .white
+        self.layer.cornerRadius = 10
+        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowRadius = 8
+        self.layer.shadowOpacity = 0.5
+
+        self.addSubview(newsImageView)
+        self.addSubview(newsTitleLabel)
+        self.addSubview(newsTimeLabel)
+        
         newsTitleLabel.text = article.title
-        newsTimeLabel.text = article.publishedAt
-        newsImageView.image = UIImage(named: "image1")
+        newsTimeLabel.text = article.publishedAt.iso8601ToNormalDateString(date: article.publishedAt)
+        newsImageView.loadImage(urlString: article.urlToImage)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

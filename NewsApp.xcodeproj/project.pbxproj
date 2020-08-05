@@ -31,6 +31,7 @@
 		E3C61CA024DAA56200B8CF38 /* newsMain.gif in Resources */ = {isa = PBXBuildFile; fileRef = E3C61C9F24DAA56200B8CF38 /* newsMain.gif */; };
 		E3C61CA224DAA56800B8CF38 /* newsPullToRefresh.gif in Resources */ = {isa = PBXBuildFile; fileRef = E3C61CA124DAA56700B8CF38 /* newsPullToRefresh.gif */; };
 		E3C61CA424DAA56D00B8CF38 /* newsSearch.gif in Resources */ = {isa = PBXBuildFile; fileRef = E3C61CA324DAA56D00B8CF38 /* newsSearch.gif */; };
+		E3C61CA724DAB7CE00B8CF38 /* main.png in Resources */ = {isa = PBXBuildFile; fileRef = E3C61CA624DAB7CE00B8CF38 /* main.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		E3C61C9F24DAA56200B8CF38 /* newsMain.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newsMain.gif; sourceTree = "<group>"; };
 		E3C61CA124DAA56700B8CF38 /* newsPullToRefresh.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newsPullToRefresh.gif; sourceTree = "<group>"; };
 		E3C61CA324DAA56D00B8CF38 /* newsSearch.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newsSearch.gif; sourceTree = "<group>"; };
+		E3C61CA624DAB7CE00B8CF38 /* main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				E3C61C9F24DAA56200B8CF38 /* newsMain.gif */,
 				E3C61CA324DAA56D00B8CF38 /* newsSearch.gif */,
 				E3C61CA124DAA56700B8CF38 /* newsPullToRefresh.gif */,
+				E3C61CA624DAB7CE00B8CF38 /* main.png */,
 				E3C61C9D24DAA55300B8CF38 /* README.md */,
 				E3C61C5024D8502C00B8CF38 /* NewsApp */,
 				E3C61C4F24D8502C00B8CF38 /* Products */,
@@ -257,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3C61CA724DAB7CE00B8CF38 /* main.png in Resources */,
 				E3C61CA224DAA56800B8CF38 /* newsPullToRefresh.gif in Resources */,
 				E3C61C6124D8503400B8CF38 /* LaunchScreen.storyboard in Resources */,
 				E3C61C5E24D8503400B8CF38 /* Assets.xcassets in Resources */,

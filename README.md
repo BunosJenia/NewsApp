@@ -36,3 +36,21 @@ Search bar allow user to filter currently downloaded news by news title(User can
 - Made template for TableHeader, but faced with some issues so didn't finish with it.
 - Didn't implement single NewsArticle Page.
 - If no Image provided standard image will be added.
+
+
+If you want to use  `HeaderView` you should:
+- add `var headerView: HeaderView?` to `AppController` 
+- update `addHeader` method in `AppController` :
+
+```
+func addHeader(article: NewsArticle) {
+    if self.dayCount == 0 {
+        self.headerView = HeaderView(frame: self.tableView.frame, article: article)
+    }
+}
+```
+ 
+ And it will Look like:
+ ![Main](main.png)
+ 
+
