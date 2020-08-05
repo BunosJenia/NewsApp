@@ -213,7 +213,6 @@ extension AppController {
 }
 
 // MARK: SearchBar functionality
-
 extension AppController: UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
