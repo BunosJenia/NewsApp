@@ -11,11 +11,10 @@ import Foundation
 class NewsAPIManager {
     let secondsInDay: Int = -86400
     let dateFormatterPattern = "yyyy-MM-dd"
-    let apiKey = "" //Here-should-be-your-key"
-    let url = "https://newsapi.org/v2/everything?domains=sophos.com,wsj.com&from=%@&apiKey=%@"
-    let urlFromTo = "https://newsapi.org/v2/everything?domains=sophos.com,wsj.com&from=%@&to=%@&apiKey=%@"
+    let url = "https://newsapi.org/v2/everything?domains=thenextweb.com&from=%@&pageSize=100&apiKey=%@"
+    let urlFromTo = "https://newsapi.org/v2/everything?domains=thenextweb.com&from=%@&to=%@&pageSize=100&apiKey=%@"
     
-    func getNews(daysAgo: Int, onSuccess: @escaping([NewsArticle]) -> Void, onFailure: @escaping(Error) -> Void) {
+    func getNews(daysAgo: Int, onSuccess: @escaping([NewsArticle]) -> Void, onFailure: @escaping() -> Void) {
         let task = URLSession.shared.dataTask(with: self.getUrl(daysAgo: daysAgo), completionHandler: {data, response, error in
             guard let data = data, error == nil else { return }
 
@@ -23,10 +22,7 @@ class NewsAPIManager {
             do {
                 json = try JSONDecoder().decode(NewsResponse.self, from: data)
             } catch {
-                
-                print(self.getUrl(daysAgo: daysAgo))
-                print("\(error)")
-                onFailure("Error" as! Error)
+                onFailure()
             }
             
             guard let result = json else { return }
@@ -43,7 +39,7 @@ extension NewsAPIManager {
         if daysAgo == 0 {
             let formatter = ISO8601DateFormatter()
             let fromDate = formatter.string(from: Date.init(timeIntervalSinceNow: TimeInterval(secondsInDay)))
-            let latestUrl = NSString(format: url as NSString, fromDate, apiKey)
+            let latestUrl = NSString(format: url as NSString, fromDate, APIKey)
             
             return URL(string: latestUrl as String)!
         }
@@ -53,7 +49,7 @@ extension NewsAPIManager {
         
         let fromDate = formatter.string(from: Date.init(timeIntervalSinceNow: TimeInterval(secondsInDay * daysAgo)))
         
-        let myUrl = NSString(format: urlFromTo as NSString, fromDate, fromDate, apiKey)
+        let myUrl = NSString(format: urlFromTo as NSString, fromDate, fromDate, APIKey)
         
         return URL(string: myUrl as String)!
     }

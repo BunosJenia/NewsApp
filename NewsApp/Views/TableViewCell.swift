@@ -78,7 +78,7 @@ class TableViewCell: UITableViewCell {
         
         if let data = data {
             newsTitleLabel.text = data.title
-            newsTimeLabel.text = data.publishedAt
+            newsTimeLabel.text = data.publishedAt.iso8601ToNormalDateString(date: data.publishedAt)
             newsImageView.loadImage(urlString: data.urlToImage)
             
             self.newsTitleLabel.addTrailing(with: "... ", moreText: "Show More", moreTextFont: UIFont.systemFont(ofSize: showMoreFontSize), moreTextColor: UIColor.blue)

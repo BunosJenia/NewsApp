@@ -107,7 +107,6 @@ extension AppController {
         self.showActivityIndicator()
         
         refreshNews()
-        
         sender.endRefreshing()
     }
 }
@@ -115,21 +114,15 @@ extension AppController {
 // MARK: APIManager wrapper for getting News
 extension AppController {
     func refreshNews() {
-        newsAPIManager.getNews(daysAgo: 0, onSuccess: { result in
+        self.dayCount = 0
+        
+        newsAPIManager.getNews(daysAgo: self.dayCount, onSuccess: { result in
             DispatchQueue.main.async {
-//                if self.newsArticles.contains(result.first!) == true {
-//                    self.hideActivityIndicator()
-//                } else {
-//                    self.appendUniqueArticlesToStartPossition(articles: result)
-//                    self.tableView.reloadData()
-//                    self.isFetchingMoreData = false
-//                    self.hideActivityIndicator()
-//                }
                 self.newsArticles.removeAll()
                 self.updateNewsArticles(result: result)
             }
-        }, onFailure: { error in
-            self.showAlert(error: error)
+        }, onFailure: {
+            self.showAlert()
         })
     }
     
@@ -141,8 +134,8 @@ extension AppController {
                 self.addHeader()
                 self.updateNewsArticles(result: result)
             }
-        }, onFailure: { error in
-            self.showAlert(error: error)
+        }, onFailure: {
+            self.showAlert()
         })
     }
 }
@@ -173,10 +166,16 @@ extension AppController {
         LoaderView.shared.hideLoader()
     }
     
-    func showAlert(error: Error) {
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-        self.show(alert, sender: nil)
+    func showAlert() {
+        DispatchQueue.main.async {
+           let alert = UIAlertController(title: "Error", message: "Something go wrong.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { _ in
+                exit(0)
+            }))
+            self.present(alert, animated: true)
+
+            self.hideActivityIndicator()
+        }
     }
     
     func updateNewsArticles(result: [NewsArticle]) {
@@ -188,7 +187,7 @@ extension AppController {
     }
 }
 
-// MARK:
+// MARK: Add new NewsArticles
 extension AppController {
     private func appendUniqueArticles(articles: [NewsArticle]) {
         for article in articles {
